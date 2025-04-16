@@ -1,0 +1,64 @@
+*Top Bug Bounty Google Dorks (With High Effectiveness)*
+
+     1. **Finding Login Pages**
+    
+    inurl:login | inurl:signin | intitle:Login | intitle:"admin login"
+    
+    1. **Exposed Configuration Files**
+        
+        intitle:"Index of" "config.php”
+        
+        ext:env | ext:ini | ext:yaml | ext:conf | ext:xml "db_password”   
+        
+    
+    **3.Database Dumps / SQL Backups**
+    
+    intitle:"Index of" "db.sql" | "dump.sql" | "backup.sql”
+    
+    filetype:sql intext:"-- phpMyAdmin SQL Dump”
+    
+    1. **Exposed `.git` Repositories**
+        
+        inurl:/.git/config
+        
+    2. **Open Directories with Sensitive Info**
+        
+        intitle:"index of" + "/admin"
+        intitle:"index of" + "/password"
+        intitle:"index of" + "/confidential"
+        
+    3. **Sensitive Information in PDFs**
+        
+        filetype:pdf intext:"password" OR intext:"confidential"
+        
+    4. **Exposed .env Files (often contain secrets)**
+        
+        inurl:.env DB_PASSWORD filetype:en
+        
+    5. **AWS Credentials Exposure**
+        
+        filetype:env AWS_SECRET_ACCESS_KEY
+        
+    6. **Exposed Log Files**
+        
+        intitle:"index of" ".log"
+        filetype:log intext:"error"
+        
+    7. **Technology / CMS Detection**
+        
+        inurl:"/wp-content/" OR inurl:"/wp-admin/" (for WordPress)
+        inurl:"/sites/default/files/" (for Drupal)
+        inurl:"/media/com_" (for Joomla)
+        
+    
+    **🛡️ Pro Tips for Using Dorks:**
+    
+    site:example.com inurl:admin
+    
+    **Use `-` to exclude irrelevant results:**
+    
+    inurl:login -github.com -stackoverflow.com
+    
+    site:example.com intitle:"index of" + "/admin"
+    site:example.com intitle:"index of" + "/password"
+    site:example.com intitle:"index of" + "/confidential"
